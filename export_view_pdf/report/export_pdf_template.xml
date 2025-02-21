@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!--    template for export pdf without  group by-->
+    <template id="export_in_pdf">
+        <t t-call="web.html_container">
+            <t t-call="web.internal_layout">
+                <div class="page">
+                    <img src="export_view_pdf/static/src/img/pdf_header.png" alt="Header Image" style="width: 100%; height: auto"/>
+                    <h3 class="text-center my-4"><t t-out="record['description']"/></h3>
+                    <div style="overflow-x: auto;">
+                        <table class="table table-bordered"
+                            style="width: 100%; table-layout: fixed; font-size: 12px;">
+                            <tr>
+                                <t t-if="record['description']=='Inward Register'">
+                                    <t t-foreach="length" t-as="length">
+                                    </t>
+                                    <tr>
+                                        <th rowspan="2"><span>General Number</span></th>
+                                        <th colspan="2" class="text-center"><span>Inward letter</span></th>
+                                        <th rowspan="2"><span>From Whom Recieved</span></th>
+                                        <th colspan="2" class="text-center"><span>Reply to out which letter</span></th>
+                                        <th rowspan="2"><span>Subject</span></th>
+                                        <th rowspan="2"><span>Date of Reciept</span></th>
+                                        <th colspan="2" class="text-center"><span>Reply</span></th>
+                                        <th rowspan="2"><span>Number of compliment</span></th>
+                                    </tr>
+                                    <tr>
+                                        <th><span>No.</span></th>
+                                        <th><span>Date</span></th>
+                                        <th><span>No.</span></th>
+                                        <th><span>Date</span></th>
+                                        <th><span>No.</span></th>
+                                        <th><span>Date</span></th>
+                                    </tr>
+                                </t>
+                                <t t-else="">
+                                    <t t-foreach="length" t-as="length">
+                                        <th style="width: auto;">
+                                            <span t-out="record['header'][length]"/>
+                                        </th>
+                                    </t>
+                                </t>
+                            </tr>
+                            <t t-foreach="record['data']" t-as="rec">
+                                <tr>
+                                    <t t-foreach="length+1" t-as="ln">
+                                        <td style="word-wrap: break-word;">
+                                            <span t-out="rec[ln]"/>
+                                        </td>
+                                    </t>
+                                </tr>
+                            </t>
+                        </table>
+                    </div>
+                </div>
+            </t>
+        </t>
+    </template>
+</odoo>
