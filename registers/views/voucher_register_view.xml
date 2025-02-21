@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Search -->
+    <record id="voucher_register_view_search" model="ir.ui.view">
+        <field name="name">voucher.register.search</field>
+        <field name="model">voucher.register</field>
+        <field name="arch" type="xml">
+            <search string="search property">
+                <field name="voucher_no"></field>
+                <field name="account_name"/>
+            </search>
+        </field>
+    </record>
+    
+    <!-- Records -->
+    <record id="gpr_register_action" model="ir.actions.act_window">
+        <field name="name"> GPR Register </field>
+        <field name="res_model">general_purchase.register</field>
+        <field name="view_mode">list</field>
+        <field name="target">new</field>
+        <field name="context">
+            {
+                'default_active_id':active_id,            }
+        </field>
+    </record>
+
+    <!-- View -->
+    <record id="voucher_register_view_list" model="ir.ui.view">
+        <field name="name">voucher.register.list</field>
+        <field name="model">voucher.register</field>
+        <field name="arch" type="xml">
+            <list string="Channel" default_order="create_date desc" editable="top" create="1" delete="1">
+                <field name="voucher_no"/>
+                <field name="date"/>
+                <field name="account_name"/>
+                <field name="details"/>
+                <field name="debit" sum="debit sum"/>
+                <field name="credit" sum="Credit Sum"/>
+                <button name="%(gpr_register_action)d" string="Confirm" type="action" class="oe_highlight"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Records -->
+    <record id="voucher_register_action" model="ir.actions.act_window">
+        <field name="name"> voucher Register </field>
+        <field name="res_model">voucher.register</field>
+        <field name="view_mode">list</field>
+    </record>
+
+    <menuitem id="first_level_menu_voucher_register" action="voucher_register_action" name="Voucher Register" parent="student_model_menu_action" />
+</odoo>

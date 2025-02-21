@@ -1,0 +1,56 @@
+<odoo>
+    <template id="report_letter_template">
+        <t t-call="web.html_container">
+        <t t-call="web.internal_layout">
+            <t t-foreach="docs" t-as="doc">
+                <div class="page"  style="font-size: 12px !important;">
+                    <img src="export_view_pdf/static/src/img/pdf_header.png" alt="Header Image" style="width: 100%; height: auto"/>
+                    <div class="d-flex justify-content-between">
+                    <div class="container o_text_columns mt-5" style="font-size: 12px !important;">
+                        <div class="row"><div class="col-3">
+                       
+                            <!-- Date & sr no -->
+                            <p><strong>
+                                <span class="base-fs">બીજક</span></strong>
+                                <span class="base-fs">: <t t-out="doc.serial_no"/></span></p>
+                            <p></p></div><div class="col-3"><p><strong>
+                            <span class="base-fs"><span class="oe-tabs" style="width: 35.1px;">       </span>​<span class="oe-tabs" style="width: 40px;">      </span>​<span class="oe-tabs" style="width: 40px;">      </span>​<span class="oe-tabs" style="width: 40px;">      </span></span></strong></p></div><div class="col-3"><p><br/></p></div><div class="col-3"><p>
+                            <strong><span class="base-fs">Date:  <t t-out="doc.date"/> </span></strong></p><p><br/></p></div></div></div><p><br/></p>
+                    
+                        
+                    </div>
+
+                    <div>
+                        <!-- Name & address -->
+                        <div><strong><span class="base-fs">પ્રતિ, </span> </strong> </div>
+                        <t t-out="doc.full_name"/> <br></br>
+                        <t t-out="doc.address"/>
+                    </div>
+                    <br></br>
+                    <div>
+                        <!-- Subject -->
+                        <p><strong>
+                            <span class="base-fs">વિષય: </span> </strong><t t-out="doc.description"/> </p>
+                    </div>
+                    
+                    <div>
+                        <!-- Body & ending -->
+                        <t t-out="doc.body"/>
+                    </div>
+                </div>
+            </t>
+        </t>
+        </t>
+    </template>
+
+    
+    <record id="outward_letter_report" model="ir.actions.report">
+        <field name="name">Outward report</field>
+        <field name="model">outward.register</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">registers.report_letter_template</field>
+        <field name="report_file">registers.report_letter_template</field>
+        <field name="paperformat_id" ref="letter_format_export"/>
+    </record>
+
+</odoo>
